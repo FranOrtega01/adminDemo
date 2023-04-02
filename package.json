@@ -1,0 +1,25 @@
+{
+  "name": "admindemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss src/public/scss/styles/-scss.scss src/public/css/styles.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.1",
+    "mongoose": "^6.10.0",
+    "mongoose-paginate-v2": "^1.7.1",
+    "node-sass": "^8.0.0",
+    "socket.io": "^4.6.1"
+  }
+}

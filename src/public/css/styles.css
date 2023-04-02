@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+#main {
+  height: calc(100vh - 70px);
+  background-color: #F0F0F0;
+  padding: 0 50px; }
+
+.alertCont {
+  height: 30%; }
+
+#accordionSidebar {
+  background-color: #6A5BE2;
+  transition: all 200ms ease-in-out; }
+
+.btnSidebar {
+  background-color: rgba(210, 210, 210, 0.3);
+  color: #F0F0F0;
+  width: 80%;
+  margin: 10px auto;
+  padding-inline: 4px;
+  transition: all 400ms ease; }
+  .btnSidebar:hover {
+    background-color: rgba(210, 210, 210, 0.3);
+    color: #F0F0F0;
+    transform: translateY(-3px); }
+
+.flujoCont {
+  display: flex;
+  overflow-x: scroll;
+  padding-bottom: 20px; }
+  .flujoCont::-webkit-scrollbar {
+    height: 4px; }
+  .flujoCont::-webkit-scrollbar-thumb {
+    background-color: #A9A9A9;
+    border-radius: 30px; }
+  .flujoCont :first-child {
+    margin-left: 0; }
+  .flujoCont :last-child {
+    margin-right: 0; }
+
+.cardFlujo {
+  background-color: #fff;
+  width: 300px;
+  height: 500px;
+  border-radius: 20px;
+  padding: 20px 15px;
+  margin: 0 25px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative; }
+
+.flujoContactCont {
+  overflow-y: scroll;
+  max-height: calc(100% - 40px);
+  padding-right: 10px;
+  margin: 10px 0; }
+  .flujoContactCont::-webkit-scrollbar {
+    width: 4px;
+    background-color: white; }
+  .flujoContactCont::-webkit-scrollbar-thumb {
+    background-color: #A9A9A9;
+    border-radius: 30px; }
+  .flujoContactCont > i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 75px;
+    color: #A9A9A9;
+    animation: upDown infinite 3s ease-in-out; }
+
+@keyframes upDown {
+  50% {
+    translate: 0 -6px; }
+  100% {
+    translate: 0; } }
+
+.cardTitulo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative; }
+  .cardTitulo h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #292929;
+    margin: 0;
+    padding-bottom: 10px;
+    user-select: none; }
+  .cardTitulo i {
+    position: absolute;
+    right: 0;
+    cursor: pointer; }
+  .cardTitulo::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #A9A9A9; }
+
+.cardFlujoContact {
+  display: grid;
+  grid-template-areas: "name enterprise btn" "mark mmsi btn";
+  height: 80px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #DFDFDF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.24); }
+
+.flujoContact-name {
+  grid-area: name;
+  color: #272727;
+  font-weight: bold; }
+
+.flujoContact-enterprise {
+  grid-area: enterprise;
+  color: #989898;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.flujoContact-mmsi {
+  grid-area: mmsi;
+  color: #989898;
+  font-weight: 600; }
+
+.flujoContact-mark {
+  grid-area: mark;
+  color: #272727;
+  font-weight: bold; }
+
+.flujoContact-btn {
+  grid-area: btn;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+  .flujoContact-btn i {
+    font-size: 20px;
+    margin: 0 4px;
+    color: #ff7b00;
+    transition: all 400ms ease;
+    cursor: pointer; }
+    .flujoContact-btn i:hover {
+      transform: translateY(-3px); }
+  .flujoContact-btn :first-child {
+    color: #0071FF; }
