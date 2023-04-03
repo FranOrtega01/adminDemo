@@ -3,8 +3,10 @@ import mongoose from "mongoose";
 const contactCollection = 'contacts';
 
 const contactSchema = new mongoose.Schema({
+    enterprise: String,
     owner: String,
     name: String,
+    email: String,
     imoNumber:{
         type:Number,
         unique:true

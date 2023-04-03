@@ -7,8 +7,21 @@
 #main{
     height: calc(100vh - 70px);
     background-color: #F0F0F0;
-    padding: 0 50px;
+    padding: 10px 50px;
+    display: grid;
+    grid-template-areas: 
+    "alert"
+    "flujo"
+    ;
+    grid-template-rows: 2fr 8fr;
+    grid-gap: 10px;
 }
 .alertCont{
-    height: 30%;
+    grid-area: alert;
+    border:1px dashed #a4a4a4;
+    border-radius: 10px;
+}
+
+.flujoCont{
+    grid-area: flujo    ;
 }

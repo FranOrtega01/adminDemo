@@ -9,7 +9,6 @@ export const get =  async (req, res) => {
         res.send(error)
     }
 }
-
 // Get contact by ID
 export const getOneByID = async (req, res) => {
     const { id } = req.params
@@ -22,12 +21,14 @@ export const getOneByID = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    const {owner, name,imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
+    const {enterprise, owner, name,email,imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
         try {
             // Crear contacto
             const newUser = {
+                enterprise,
                 owner, 
                 name, 
+                email,
                 imoNumber,
                 mmsi,
                 callSign, 
@@ -50,13 +51,15 @@ export const create = async (req, res) => {
 export const update = async(req, res) => {
 
     console.log('BODY: ', req.body);
-    const {id, owner, name,imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
+    const {id, enterprise, owner, name,email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
 
     try {
         
         const data = {
+            enterprise,
             owner, 
             name, 
+            email,
             imoNumber,
             mmsi,
             callSign, 
@@ -75,5 +78,35 @@ export const update = async(req, res) => {
 
     } catch (error) {
         res.send(error)
+    }
+}
+
+export const addHistory = async (req, res) => {
+    const {message} = req.body
+    const {id} = req.params
+
+    const date = new Date()
+    try {
+        const newHistory = {
+            message,
+            date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+        }
+
+        await ContactService.addHistory(id, newHistory)
+
+        res.redirect('/admin')
+    } catch (error) {
+        console.log('ERROR: ', error);
+    }
+}
+
+export const getHistory = async (req, res) => {
+    const {id} = req.params
+
+    try {
+        const historyLog = await ContactService.getHistory(id)
+        res.send(historyLog)
+    } catch (error) {
+        res.send({status: 'error', error})
     }
 }

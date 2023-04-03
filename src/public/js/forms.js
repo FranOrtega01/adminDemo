@@ -1,25 +1,25 @@
-const owner = document.getElementById('owner')
-const ownerUpdate = document.getElementById('ownerUpdate')
+const enterprise = document.getElementById('enterprise')
+const enterpriseUpdate = document.getElementById('enterpriseUpdate')
 
 
-const ownerOptions = async () => {
+const enterpriseOptions = async () => {
     try {
-        const owners = await fetch('/api/admin/enterprise')
-        const data = await owners.json()
+        const enterprises = await fetch('/api/admin/enterprise')
+        const data = await enterprises.json()
 
         let acumulador = `<option disabled selected value=''>Select a company</option>`
 
         data.enterprises.forEach(el => {
             acumulador += `<option value='${el.name}'>${el.name}</option>`
         });
-        owner.innerHTML = acumulador
-        ownerUpdate.innerHTML = acumulador
+        enterprise.innerHTML = acumulador
+        enterpriseUpdate.innerHTML = acumulador
     } catch (error) {
         console.log(error);
     }
 }
 
-ownerOptions()
+enterpriseOptions()
 
 // ----------------Update----------------
 
@@ -27,7 +27,9 @@ ownerOptions()
 
 const updateBtn = document.querySelectorAll('.fa-pen')
 
+const ownerUpdate = document.getElementById('ownerUpdate')
 const nameUpdate = document.getElementById('nameUpdate')
+const emailUpdate = document.getElementById('emailUpdate')
 const imoNumberUpdate = document.getElementById('imoNumberUpdate')
 const mmsiUpdate = document.getElementById('mmsiUpdate')
 const callSignUpdate = document.getElementById('callSignUpdate')
@@ -48,8 +50,10 @@ updateBtn.forEach(btn => {
             const data = await fetch(`api/admin/contact/${id}`)
             const contact = await data.json()
 
+            enterpriseUpdate.value = contact.enterprise || 'guti'
             ownerUpdate.value = contact.owner || ''
             nameUpdate.value = contact.name || ''
+            emailUpdate.value = contact.email || ''
             imoNumberUpdate.value = contact.imoNumber || ''
             mmsiUpdate.value = contact.mmsi || ''
             callSignUpdate.value = contact.callSign || ''
@@ -74,7 +78,7 @@ submit.addEventListener('click', async () => {
 
     const data = {
         id,
-        owner: ownerUpdate.value,
+        enterprise: enterpriseUpdate.value,
         name:  nameUpdate.value,
         imoNumber:imoNumberUpdate.value,
         mmsi:mmsiUpdate.value,
@@ -101,4 +105,39 @@ submit.addEventListener('click', async () => {
         .then(() => {
             location.reload()
         })
+})
+
+
+//History
+
+const historyBtn = document.querySelectorAll('.fa-clipboard')
+const historyForm = document.querySelector('#historyForm')
+const historyUl = document.querySelector('#historyModal ul')
+
+historyBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+        id = e.target.getAttribute('data-id')
+        historyForm.action = `api/admin/contact/${id}/history`
+    })
+})
+
+historyBtn.forEach(btn => {
+    btn.addEventListener('click', async e => {
+        id = e.target.getAttribute('data-id')
+
+        const history = await fetch(`api/admin/contact/${id}/history`)
+        const data = await history.json()
+
+        let historyLog = ''
+
+        data.forEach(h => {
+        
+            historyLog += `
+            <p>${h.date}</p>
+            <li>${h.message}</li>
+            `
+        })
+
+        historyUl.innerHTML = historyLog
+    })
 })

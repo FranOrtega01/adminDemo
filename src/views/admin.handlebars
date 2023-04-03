@@ -132,160 +132,158 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    
-                </div>
+                
 
                 {{!-- Main Content --}}
 
                     {{!-- Card flujo --}}
                 <div id="main">
-                <div class="alertCont">
+                    <div class="alertCont">
+                        alerta
+                    </div>
+                    <div class="flujoCont">
 
-                </div>
-                <div class="flujoCont">
-
-                    {{!-- New ship --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>Nuevo Barco</h2>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div class="flujoContactCont">
-                            {{#if newShip}}
-                                {{#each newShip}}
-                                    <div class="cardFlujoContact">
-                                        <div class="flujoContact-name">{{name}}</div>
-                                        <div class="flujoContact-enterprise">{{owner}}</div>
-                                        <div class="flujoContact-mark">{{mark}}</div>
-                                        <div class="flujoContact-mmsi">#{{mmsi}}</div>
-                                        <div class="flujoContact-btn">
-                                            <i id="gutiID" data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
-                                            <i  data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                        {{!-- New ship --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>Nuevo Barco</h2>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div class="flujoContactCont">
+                                {{#if newShip}}
+                                    {{#each newShip}}
+                                        <div class="cardFlujoContact">
+                                            <div class="flujoContact-name">{{name}}</div>
+                                            <div class="flujoContact-enterprise">{{enterprise}}</div>
+                                            <div class="flujoContact-mark">{{mark}}</div>
+                                            <div class="flujoContact-mmsi">{{callSign}}</div>
+                                            <div class="flujoContact-btn">
+                                                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                                                <i data-toggle="modal" data-target="#historyModal" data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                {{/each}}
-                                {{else}}
-                                <i class="fa-solid fa-ship"></i>
-                            {{/if}}
+                                    {{/each}}
+                                    {{else}}
+                                    <i class="fa-solid fa-ship"></i>
+                                {{/if}}
+                            </div>
                         </div>
-                    </div>
 
-                    {{!-- Waiting Info --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>Esperando Info</h2>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div class="flujoContactCont">
-                            {{#if waiting}}
-                                {{#each waiting}}
-                                    <div class="cardFlujoContact">
-                                        <div class="flujoContact-name">{{name}}</div>
-                                        <div class="flujoContact-enterprise">{{owner}}</div>
-                                        <div class="flujoContact-mark">{{mark}}</div>
-                                        <div class="flujoContact-mmsi">#{{mmsi}}</div>
-                                        <div class="flujoContact-btn">
-                                            <i id="gutiID" data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
-                                            <i data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                        {{!-- Waiting Info --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>Esperando Info</h2>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div class="flujoContactCont">
+                                {{#if waiting}}
+                                    {{#each waiting}}
+                                        <div class="cardFlujoContact">
+                                            <div class="flujoContact-name">{{name}}</div>
+                                            <div class="flujoContact-enterprise">{{enterprise}}</div>
+                                            <div class="flujoContact-mark">{{mark}}</div>
+                                            <div class="flujoContact-mmsi">{{callSign}}</div>
+                                            <div class="flujoContact-btn">
+                                                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                                                <i data-toggle="modal" data-target="#historyModal" data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                {{/each}}
-                                {{else}}
-                                <i class="fa-solid fa-ship"></i>
-                            {{/if}}
+                                    {{/each}}
+                                    {{else}}
+                                    <i class="fa-solid fa-ship"></i>
+                                {{/if}}
+                            </div>
                         </div>
-                    </div>
 
-                    {{!-- Compensating --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>En Compensación</h2>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div class="flujoContactCont">
-                            {{#if compensating}}
-                                {{#each compensating}}
-                                    <div class="cardFlujoContact">
-                                        <div class="flujoContact-name">{{name}}</div>
-                                        <div class="flujoContact-enterprise">{{owner}}</div>
-                                        <div class="flujoContact-mark">{{mark}}</div>
-                                        <div class="flujoContact-mmsi">#{{mmsi}}</div>
-                                        <div class="flujoContact-btn">
-                                            <i id="gutiID" data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
-                                            <i data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                        {{!-- Compensating --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>En Compensación</h2>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div class="flujoContactCont">
+                                {{#if compensating}}
+                                    {{#each compensating}}
+                                        <div class="cardFlujoContact">
+                                            <div class="flujoContact-name">{{name}}</div>
+                                            <div class="flujoContact-enterprise">{{enterprise}}</div>
+                                            <div class="flujoContact-mark">{{mark}}</div>
+                                            <div class="flujoContact-mmsi">{{callSign}}</div>
+                                            <div class="flujoContact-btn">
+                                                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                                                <i data-toggle="modal" data-target="#historyModal" data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                {{/each}}
-                                {{else}}
-                                <i class="fa-solid fa-ship"></i>
-                            {{/if}}
+                                    {{/each}}
+                                    {{else}}
+                                    <i class="fa-solid fa-ship"></i>
+                                {{/if}}
+                            </div>
                         </div>
-                    </div>
 
-                    {{!-- Signing --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>Esperando Firma</h2>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div class="flujoContactCont">
-                            {{#if signing}}
-                                {{#each signing}}
-                                    <div class="cardFlujoContact">
-                                        <div class="flujoContact-name">{{name}}</div>
-                                        <div class="flujoContact-enterprise">{{owner}}</div>
-                                        <div class="flujoContact-mark">{{mark}}</div>
-                                        <div class="flujoContact-mmsi">#{{mmsi}}</div>
-                                        <div class="flujoContact-btn">
-                                            <i id="gutiID" data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
-                                            <i data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                        {{!-- Signing --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>Esperando Firma</h2>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div class="flujoContactCont">
+                                {{#if signing}}
+                                    {{#each signing}}
+                                        <div class="cardFlujoContact">
+                                            <div class="flujoContact-name">{{name}}</div>
+                                            <div class="flujoContact-enterprise">{{enterprise}}</div>
+                                            <div class="flujoContact-mark">{{mark}}</div>
+                                            <div class="flujoContact-mmsi">{{callSign}}</div>
+                                            <div class="flujoContact-btn">
+                                                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                                                <i data-toggle="modal" data-target="#historyModal" data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                {{/each}}
-                                {{else}}
-                                <i class="fa-solid fa-ship"></i>
-                            {{/if}}
+                                    {{/each}}
+                                    {{else}}
+                                    <i class="fa-solid fa-ship"></i>
+                                {{/if}}
+                            </div>
                         </div>
-                    </div>
 
-                    {{!-- Billing --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>En Facturacion</h2>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div class="flujoContactCont">
-                            {{#if billing}}
-                                {{#each billing}}
-                                    <div class="cardFlujoContact">
-                                        <div class="flujoContact-name">{{name}}</div>
-                                        <div class="flujoContact-enterprise">{{owner}}</div>
-                                        <div class="flujoContact-mark">{{mark}}</div>
-                                        <div class="flujoContact-mmsi">#{{mmsi}}</div>
-                                        <div class="flujoContact-btn">
-                                            <i id="gutiID" data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
-                                            <i data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                        {{!-- Billing --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>En Facturacion</h2>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <div class="flujoContactCont">
+                                {{#if billing}}
+                                    {{#each billing}}
+                                        <div class="cardFlujoContact">
+                                            <div class="flujoContact-name">{{name}}</div>
+                                            <div class="flujoContact-enterprise">{{enterprise}}</div>
+                                            <div class="flujoContact-mark">{{mark}}</div>
+                                            <div class="flujoContact-mmsi">{{callSign}}</div>
+                                            <div class="flujoContact-btn">
+                                                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                                                <i data-toggle="modal" data-target="#historyModal" data-id={{_id}} class="fa-solid fa-clipboard"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                {{/each}}
-                                {{else}}
-                                <i class="fa-solid fa-ship"></i>
-                            {{/if}}
+                                    {{/each}}
+                                    {{else}}
+                                    <i class="fa-solid fa-ship"></i>
+                                {{/if}}
+                            </div>
                         </div>
-                    </div>
 
-                    {{!-- Closed --}}
-                    <div class="cardFlujo">
-                        <div class="cardTitulo">
-                            <h2>Cerrado</h2>
+                        {{!-- Closed --}}
+                        <div class="cardFlujo">
+                            <div class="cardTitulo">
+                                <h2>Cerrado</h2>
+                            </div>
+                            <div class="flujoContactCont">
+                                <i class="fa-solid fa-person-skiing"></i>
+                            </div>
                         </div>
-                        <div class="flujoContactCont">
-                            <i class="fa-solid fa-person-skiing"></i>
-                        </div>
+                        
                     </div>
-                    
                 </div>
                 {{!-- Main Content End --}}
 
@@ -317,6 +315,8 @@
             </div>
         </div>
     </div>
+
+    {{!-- Enterprise --}}
 
     <div class="modal fade" id="enterpriseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -365,6 +365,8 @@
         </div>
     </div>
 
+    {{!-- Contact --}}
+
     <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -378,15 +380,25 @@
                 <div class="modal-body">
                     <form action="api/admin/contact" method="post" id="contactForm">
 
-                        {{!-- Owner (Enterprise) --}}
+                        {{!-- Enterprise --}}
                         <div class="form-group">
-                            <select class="form-control" id="owner" name="owner"  aria-describedby="owner">
+                            <select class="form-control" id="enterprise" name="enterprise"  aria-describedby="enterprise">
                             </select>
+                        </div>
+
+                        {{!-- Owner --}}
+                        <div class="form-group">
+                            <input required type="text" class="form-control" id="owner" name="owner"  aria-describedby="owner" placeholder="Owner">
                         </div>
 
                         {{!-- Name --}}
                         <div class="form-group">
                             <input required type="text" class="form-control" id="name" name="name"  aria-describedby="name" placeholder="Name">
+                        </div>
+
+                        {{!-- Email --}}
+                        <div class="form-group">
+                            <input required type="email" class="form-control" id="email" name="email"  aria-describedby="email" placeholder="Email">
                         </div>
 
                         {{!-- IMO Number --}}
@@ -406,7 +418,7 @@
 
                         {{!-- Flag (Country) --}}
                         <div class="form-group">
-                            <input required class="form-control" id="flag" name="flag" aria-describedby="flag" placeholder="Country">
+                            <input required class="form-control" id="flag" name="flag" aria-describedby="flag" placeholder="Flag">
                         </div>
 
                         {{!-- Port Reglamentation --}}
@@ -451,6 +463,7 @@
         </div>
     </div>
 
+    {{!-- Update --}}
 
     <div class="modal fade" id="updateContactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -464,17 +477,25 @@
                 </div>
                 <div class="modal-body">
                     <form id="updateForm">
-                        {{!-- Owner (Enterprise) --}}
+
+                        {{!-- Enterprise --}}
                         <div class="form-group">
-                            <select class="form-control" id="ownerUpdate" name="owner" aria-describedby="owner">
+                            <select class="form-control" id="enterpriseUpdate" name="enterprise"  aria-describedby="enterprise">
                             </select>
                         </div>
 
+                        {{!-- Owner --}}
+                        <div class="form-group">
+                            <input required type="text" class="form-control" id="ownerUpdate" name="owner" aria-describedby="owner" placeholder="Owner">
+                        </div>
                         {{!-- Name --}}
                         <div class="form-group">
                             <input required type="text" class="form-control" id="nameUpdate" name="name"  aria-describedby="name" placeholder="Name">
                         </div>
 
+                        <div class="form-group">
+                            <input required type="email" class="form-control" id="emailUpdate" name="email"  aria-describedby="email" placeholder="Email">
+                        </div>
                         {{!-- IMO Number --}}
                         <div class="form-group">
                             <input required type="text" class="form-control" id="imoNumberUpdate" name="imoNumber" aria-describedby="imoNumber" placeholder="IMO Number">
@@ -492,7 +513,7 @@
 
                         {{!-- Flag (Country) --}}
                         <div class="form-group">
-                            <input required class="form-control" id="flagUpdate" name="flag" aria-describedby="flag" placeholder="Country">
+                            <input required class="form-control" id="flagUpdate" name="flag" aria-describedby="flag" placeholder="Flag">
                         </div>
 
                         {{!-- Port Reglamentation --}}
@@ -537,20 +558,34 @@
         </div>
     </div>
 
+    {{!-- History --}}
 
-    {{!-- Templates --}}
+    <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">History</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <ul>
 
-    <template id="templateAlbum">
-        <div class="cardFlujoContact">
-            <div class="flujoContact-name">Name</div>
-            <div class="flujoContact-enterprise">Enterprise</div>
-            <div class="flujoContact-mark">Mark</div>
-            <div class="flujoContact-btn">
-                <i class="fa-solid fa-pen"></i>
-                <i class="fa-solid fa-clipboard"></i>
+                        </ul>
+                    <form action="api/admin/contact/:id/history" method="post" id="historyForm">
+                        <textarea required name="message" id="historyContact"></textarea>
+                        <button id="submitBtn" type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
-    </template>
+    </div>
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="js/forms.js"></script>

@@ -21,6 +21,19 @@ export default class Contact{
         return await contactModel.find(search).lean().exec()
     }
 
+    getHistory = async (id) => {
+        const user = await this.getOneByID(id)
+        const history = user.history
+        return history
+    }
+
+    addHistory = async (id, data) => {
+        const user = await this.getOneByID(id)
+        const history = user.history
+        history.push(data)
+        return await this.update(id, user)
+    }
+
     update = async(id, updUser)=>{
         try {
             const result = await contactModel.updateOne({_id: id}, updUser);

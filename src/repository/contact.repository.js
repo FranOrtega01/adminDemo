@@ -35,7 +35,23 @@ export default class ContactRepository{
         try {
             return await this.dao.getByParam(key, value)
         } catch (error) {
-            throw new Error('Enterprise not found.');
+            throw new Error('Contact not found.');
+        }
+    }
+
+    getHistory = async (id) => {
+        try {
+            return await this.dao.getHistory(id)
+        } catch (error) {
+            throw new Error(error)            
+        }
+    }
+
+    addHistory = async (id, data) => {
+        try {
+            return await this.dao.addHistory(id,data)
+        } catch (error) {
+            throw new Error(error)
         }
     }
 
