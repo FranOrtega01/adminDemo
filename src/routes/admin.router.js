@@ -14,11 +14,12 @@ router.get('/contact/:id', getOneByIDContact)
 
 router.post('/contact', createContact)
 
-router.put('/contact', updateContact)
+router.put('/contact/:id', updateContact)
 
 // Contact History
 
 router.get('/contact/:id/history', getHistory)
+
 router.post('/contact/:id/history', addHistory)
 
 router.get('/enterprise', getEnterprise)

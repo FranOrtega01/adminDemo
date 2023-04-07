@@ -51,8 +51,8 @@ export const create = async (req, res) => {
 export const update = async(req, res) => {
 
     console.log('BODY: ', req.body);
-    const {id, enterprise, owner, name,email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
-
+    const {enterprise, owner, name,email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
+    const { id } = req.params
     try {
         
         const data = {
@@ -110,3 +110,4 @@ export const getHistory = async (req, res) => {
         res.send({status: 'error', error})
     }
 }
+

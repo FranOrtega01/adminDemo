@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { get as getContact } from '../DAO/controller/contact.view.controller.js' 
+import { get as getContact, getPaginate } from '../DAO/controller/contact.view.controller.js' 
 import { get as getEnterprise } from '../DAO/controller/enterprise.view.controller.js';
 import { ContactService } from '../repository/index.js';
 
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     res.render('admin', {title: 'Admin Dashboard', newShip,waiting,compensating,signing,billing})
 })
 
-router.get('/contact', getContact)
+router.get('/contact', getPaginate)
 
 router.get('/enterprise', getEnterprise)
 

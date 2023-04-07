@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 const contactCollection = 'contacts';
 
@@ -22,9 +23,14 @@ const contactSchema = new mongoose.Schema({
     history:{
         type: Array,
         default: []
+    },
+    date:{
+        type: Date,
+        default: new Date()
     }
 })
 
+contactSchema.plugin(mongoosePaginate)
 const contactModel = mongoose.model(contactCollection, contactSchema)
 
 export default contactModel

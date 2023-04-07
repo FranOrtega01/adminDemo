@@ -1,23 +1,41 @@
+<header>
+    <a href="/admin">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <h2 class="text-center">Contacts <span>({{data.totalDocs}})</span></h2>
+</header>
 <div class="row justify-content-center">
-    <h2 class="text-center" >Contacts</h2>
-    <div class="col-8">
-        <table class="table table-dark table-striped table-hover">
-            <tr>
-                <th>Owner</th>
-                <th>Name</th>
-                <th>IMO</th>
-            </tr>
-            {{#each data}}
-            <tr>
-                <td>{{this.owner}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.imoNumber}}</td>
-            </tr>
-            {{/each}}
-        </table>
+    <div class="row col-11">
+        
+        <div class="searchCont p-0">
+            <input class="my-4" type="text">
+
+        </div>
+
+        {{#each data.docs}}
+        <div id="contactsViewCard" class="col-12">
+            <div class="contactsView-name">Name: {{this.name}}</div>
+            <div class="contactsView-enterprise">Enterprise: {{this.enterprise}}</div>
+            <div class="contactsView-email">Email: <span>{{this.email}}</span></div>
+            <div class="contactsView-callSign">Call Sign: {{this.callSign}}</div>
+            <div class="contactsView-flag">Flag: {{this.flag}}</div>
+            <div class="contactsView-btn">
+                <i data-toggle="modal" data-target="#updateContactModal" data-id={{_id}} class="fa-solid fa-pen"></i>
+                <i data-id={{this._id}} class="fa-solid fa-trash-can"></i>
+            </div>
+        </div>
+        {{/each}}
     </div>
 </div>
 
-<a href="/admin" class="m-5">
-    <button class="btn btn-primary">Go back</button>
-</a>
+<div class="paginateBtn">
+    {{#if data.hasPrevPage}}
+        <a href="{{data.prevLink}}">{{data.prevPage}}</a>
+    {{/if}}
+        <b>{{data.page}}</b>
+    {{#if data.hasNextPage}}
+        <a href="{{data.nextLink}}">{{data.nextPage}}</a>
+    {{/if}}
+</div>
+
+

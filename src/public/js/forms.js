@@ -6,14 +6,15 @@ const enterpriseOptions = async () => {
     try {
         const enterprises = await fetch('/api/admin/enterprise')
         const data = await enterprises.json()
+        console.log('Enterprises: ', data);
 
         let acumulador = `<option disabled selected value=''>Select a company</option>`
 
         data.enterprises.forEach(el => {
             acumulador += `<option value='${el.name}'>${el.name}</option>`
         });
-        enterprise.innerHTML = acumulador
         enterpriseUpdate.innerHTML = acumulador
+        enterprise.innerHTML = acumulador
     } catch (error) {
         console.log(error);
     }
@@ -26,6 +27,13 @@ enterpriseOptions()
 // Fill form fields with fetch 
 
 const updateBtn = document.querySelectorAll('.fa-pen')
+const updateBtn2 = document.querySelectorAll('.fa-pencil')
+
+updateBtn2.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log("click del pencil");
+    })
+})
 
 const ownerUpdate = document.getElementById('ownerUpdate')
 const nameUpdate = document.getElementById('nameUpdate')
@@ -45,12 +53,13 @@ let id
 updateBtn.forEach(btn => {
     btn.addEventListener('click', async e => {
         id = e.target.getAttribute('data-id')
-
+        console.log(id);
+        console.log('click del pen');
         try {
-            const data = await fetch(`api/admin/contact/${id}`)
+            const data = await fetch(`/api/admin/contact/${id}`)
             const contact = await data.json()
 
-            enterpriseUpdate.value = contact.enterprise || 'guti'
+            enterpriseUpdate.value = contact.enterprise || ''
             ownerUpdate.value = contact.owner || ''
             nameUpdate.value = contact.name || ''
             emailUpdate.value = contact.email || ''
@@ -80,6 +89,7 @@ submit.addEventListener('click', async () => {
         id,
         enterprise: enterpriseUpdate.value,
         name:  nameUpdate.value,
+        email: emailUpdate.value,
         imoNumber:imoNumberUpdate.value,
         mmsi:mmsiUpdate.value,
         callSign:callSignUpdate.value,
@@ -91,7 +101,7 @@ submit.addEventListener('click', async () => {
         status:statusUpdate.value,
     }
 
-    const requestURI = 'api/admin/contact'
+    const requestURI = `api/admin/contact/${id}`
     const requestOptions = {
         method: 'PUT',
         headers: { 

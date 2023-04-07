@@ -74,4 +74,14 @@ export default class ContactRepository{
             throw new Error(error);
         }
     }
+
+    getPaginate = async (search, options) => {
+        try {
+            return await this.dao.getPaginate(search, options)
+        } catch (error) {
+            console.log('error en el paginate');
+            console.log(error);
+            throw new Error(error);
+        }
+    }
 }

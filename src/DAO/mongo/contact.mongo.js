@@ -46,4 +46,8 @@ export default class Contact{
     deleteOne = async(id) => {
         return await contactModel.deleteOne({_id: id})
     }
+
+    getPaginate = async (search, options) => {
+        return await contactModel.paginate(search, options)
+    }
 }

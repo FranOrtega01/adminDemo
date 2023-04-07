@@ -16,5 +16,6 @@ export default class ContactDTO{
         this.serialNumber = cont.serialNumber
         this.status = cont.status || 'newShip'
         this.history = cont.history || []
+        this.date = cont.date || new Date()
     }
 }
