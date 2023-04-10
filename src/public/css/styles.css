@@ -8,7 +8,7 @@
   background-color: #F0F0F0;
   padding: 10px 50px;
   display: grid;
-  grid-template-areas: "alert" "flujo";
+  grid-template-areas: "alert" "flujo";
   grid-template-rows: 2fr 8fr;
   grid-gap: 10px; }
 
@@ -114,7 +114,7 @@
 
 .cardFlujoContact {
   display: grid;
-  grid-template-areas: "name enterprise btn" "mark mmsi btn";
+  grid-template-areas: "name enterprise btn" "mark mmsi btn";
   grid-template-columns: 6fr 3fr 2fr;
   height: 80px;
   width: 100%;
@@ -200,17 +200,23 @@
 
 #contactsViewCard {
   display: grid;
-  grid-template-areas: "contactName contactEnterprise contactCallSign contactFlag contactBtn" "contactEmail contactEmail contactEmail contactEmail contactBtn";
+  grid-template-areas: "contactName contactEnterprise contactCallSign contactFlag contactBtn" "contactEmail contactEmail contactEmail contactEmail contactBtn";
   width: 100%;
-  margin-bottom: 10px;
-  background-color: #E3E3E3;
+  margin-bottom: 15px;
+  background-color: #DADEDF;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   border-radius: 10px;
-  padding: 5px 20px; }
+  padding: 5px 20px;
+  color: black;
+  font-weight: 600;
+  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24); }
   #contactsViewCard:nth-child(1) {
-    margin-top: 10px; }
-  #contactsViewCard:nth-child(2n) {
-    background-color: #bababa; }
+    margin-top: 15px; }
+  #contactsViewCard:nth-child(2n - 1) {
+    background-color: #A7AFB2;
+    background-color: #b8bdbf; }
 
 header {
   color: white;
@@ -262,15 +268,25 @@ header {
   display: flex;
   justify-content: center;
   font-size: 24px; }
-  .paginateBtn b {
-    margin: 0 10px;
-    user-select: none; }
+  .paginateBtn p {
+    margin: 0 20px;
+    user-select: none;
+    font-weight: bold; }
   .paginateBtn a {
     text-decoration: none;
     color: #777777;
-    user-select: none; }
+    user-select: none;
+    font-size: 22px;
+    margin: auto 0; }
 
-.searchCont input {
-  border-radius: 15px;
-  width: 300px;
-  padding: 4px; }
+.searchCont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .searchCont div {
+    display: flex;
+    align-items: center; }
+  .searchCont input {
+    border-radius: 15px;
+    width: 300px;
+    padding: 4px; }

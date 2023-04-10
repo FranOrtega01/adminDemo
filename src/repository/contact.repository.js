@@ -58,8 +58,9 @@ export default class ContactRepository{
 
     update = async (id, data) => {
         try {
-            const newContact = new ContactDTO(data)
-            const result = await this.dao.update(id, newContact);
+            // const newContact = new ContactDTO(data)
+            const result = await this.dao.update(id, data);
+            console.log('UPDATE: ',result);
             return result;
         } catch (error) {
             console.log('error in repository');

@@ -111,3 +111,12 @@ export const getHistory = async (req, res) => {
     }
 }
 
+export const deleteOne = async (req, res) => {
+    const {id} = req.params
+    try {
+        const deleted = await ContactService.deleteOne(id)
+        res.send({status: 'success'})
+    } catch (error) {
+        res.send({status: 'error', error})
+    }
+}

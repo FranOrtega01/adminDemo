@@ -28,7 +28,7 @@ export const getPaginate = async (req, res) => {
 
     const search = {}
 
-    if(filter)  search.name = filter
+    if(filter)  search.name = filter.toUpperCase()
     
 
     if(sort){

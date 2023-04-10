@@ -5,16 +5,25 @@
     "contactEmail contactEmail contactEmail contactEmail contactBtn"
     ;
     width: 100%;
-    margin-bottom: 10px;
-    background-color: #E3E3E3;
+    margin-bottom: 15px;
+    background-color:  #DADEDF;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     border-radius: 10px;
     padding: 5px 20px;
+    color: black;
+    font-weight: 600;
+    
+    box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.24);
+    -webkit-box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.24);
+    
     &:nth-child(1){
-        margin-top: 10px;
+        margin-top: 15px;
     }
-    &:nth-child(2n){
-        background-color: #bababa;
+    &:nth-child(2n - 1){
+        background-color: #A7AFB2;
+        background-color: #b8bdbf;
+
     }
 }
 header{
@@ -76,18 +85,28 @@ header{
     display: flex;
     justify-content: center;
     font-size: 24px;
-    b{
-        margin: 0 10px;
+    p{
+        margin: 0 20px;
         user-select: none;
+        font-weight: bold;
     }
     a{
         text-decoration: none;
         color: #777777;
         user-select: none;
+        font-size: 22px;
+        margin: auto 0;
     }
 }
 
 .searchCont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div{
+        display: flex;
+        align-items: center;
+    }
     input{
         border-radius: 15px;
         width: 300px;

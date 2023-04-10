@@ -4,7 +4,7 @@ const flujoContactCont = document.querySelectorAll('.flujoContactCont')
 flujoCont.addEventListener('wheel', (e) => {
     e.preventDefault()
     flujoCont.scrollBy({
-        left: e.deltaY < 0 ? -30 : 30,
+        left: e.deltaY < 0 ? -60 : 60,
     });
     
 });

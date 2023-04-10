@@ -6,7 +6,6 @@ const enterpriseOptions = async () => {
     try {
         const enterprises = await fetch('/api/admin/enterprise')
         const data = await enterprises.json()
-        console.log('Enterprises: ', data);
 
         let acumulador = `<option disabled selected value=''>Select a company</option>`
 
@@ -27,13 +26,7 @@ enterpriseOptions()
 // Fill form fields with fetch 
 
 const updateBtn = document.querySelectorAll('.fa-pen')
-const updateBtn2 = document.querySelectorAll('.fa-pencil')
 
-updateBtn2.forEach(btn => {
-    btn.addEventListener('click', () => {
-        console.log("click del pencil");
-    })
-})
 
 const ownerUpdate = document.getElementById('ownerUpdate')
 const nameUpdate = document.getElementById('nameUpdate')
@@ -53,8 +46,6 @@ let id
 updateBtn.forEach(btn => {
     btn.addEventListener('click', async e => {
         id = e.target.getAttribute('data-id')
-        console.log(id);
-        console.log('click del pen');
         try {
             const data = await fetch(`/api/admin/contact/${id}`)
             const contact = await data.json()
@@ -79,7 +70,7 @@ updateBtn.forEach(btn => {
     })
 })
 
-const submit = document.querySelector('#submitBtn')
+const submit = document.querySelector('#updateBtn')
 
 submit.addEventListener('click', async () => {
 
@@ -89,6 +80,7 @@ submit.addEventListener('click', async () => {
         id,
         enterprise: enterpriseUpdate.value,
         name:  nameUpdate.value,
+        owner: ownerUpdate.value,
         email: emailUpdate.value,
         imoNumber:imoNumberUpdate.value,
         mmsi:mmsiUpdate.value,
@@ -101,7 +93,7 @@ submit.addEventListener('click', async () => {
         status:statusUpdate.value,
     }
 
-    const requestURI = `api/admin/contact/${id}`
+    const requestURI = `/api/admin/contact/${id}`
     const requestOptions = {
         method: 'PUT',
         headers: { 
@@ -151,3 +143,37 @@ historyBtn.forEach(btn => {
         historyUl.innerHTML = historyLog
     })
 })
+
+
+// Delete
+
+const trashBtn = document.querySelectorAll('.fa-trash-can')
+
+trashBtn.forEach(btn => {
+    btn.addEventListener('click', async e => {
+
+        id = e.target.getAttribute('data-id')
+        const requestURI = `/api/admin/contact/${id}`
+        const requestOptions = {
+            method: 'DELETE',
+        }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(requestURI, requestOptions)
+                .then(() => {
+                    location.reload()
+                })
+        }
+        })
+    })
+})
+

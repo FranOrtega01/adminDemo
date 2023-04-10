@@ -36,7 +36,8 @@ export default class Contact{
 
     update = async(id, updUser)=>{
         try {
-            const result = await contactModel.updateOne({_id: id}, updUser);
+            console.log(updUser);
+            const result = await contactModel.updateOne({_id: id}, {$set: updUser});
             return result;
         } catch (error) {
             console.log('Error en mongo: ', error);
