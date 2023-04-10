@@ -8,7 +8,7 @@
   background-color: #F0F0F0;
   padding: 10px 50px;
   display: grid;
-  grid-template-areas: "alert" "flujo";
+  grid-template-areas: "alert" "flujo";
   grid-template-rows: 2fr 8fr;
   grid-gap: 10px; }
 
@@ -114,7 +114,7 @@
 
 .cardFlujoContact {
   display: grid;
-  grid-template-areas: "name enterprise btn" "mark mmsi btn";
+  grid-template-areas: "name enterprise btn" "mark mmsi btn";
   grid-template-columns: 6fr 3fr 2fr;
   height: 80px;
   width: 100%;
@@ -198,9 +198,9 @@
   margin: 0;
   text-align: right; }
 
-#contactsViewCard {
+#contactsViewCard, #enterpriseViewCard {
   display: grid;
-  grid-template-areas: "contactName contactEnterprise contactCallSign contactFlag contactBtn" "contactEmail contactEmail contactEmail contactEmail contactBtn";
+  grid-template-areas: "contactName contactEnterprise contactCallSign contactFlag contactBtn" "contactEmail contactEmail contactEmail contactEmail contactBtn";
   width: 100%;
   margin-bottom: 15px;
   background-color: #DADEDF;
@@ -212,9 +212,9 @@
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.24); }
-  #contactsViewCard:nth-child(1) {
+  #contactsViewCard:nth-child(1), #enterpriseViewCard:nth-child(1) {
     margin-top: 15px; }
-  #contactsViewCard:nth-child(2n - 1) {
+  #contactsViewCard:nth-child(2n - 1), #enterpriseViewCard:nth-child(2n - 1) {
     background-color: #A7AFB2;
     background-color: #b8bdbf; }
 

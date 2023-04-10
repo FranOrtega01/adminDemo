@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { get as getContact, getPaginate } from '../DAO/controller/contact.view.controller.js' 
-import { get as getEnterprise } from '../DAO/controller/enterprise.view.controller.js';
+import {getPaginate as getPaginateContact } from '../DAO/controller/contact.view.controller.js' 
+import {getPaginate as getPaginateEnterprise} from '../DAO/controller/enterprise.view.controller.js';
 import { ContactService } from '../repository/index.js';
 
 const router = Router()
@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
     res.render('admin', {title: 'Admin Dashboard', newShip,waiting,compensating,signing,billing})
 })
 
-router.get('/contact', getPaginate)
+router.get('/contact', getPaginateContact)
 
-router.get('/enterprise', getEnterprise)
+router.get('/enterprise', getPaginateEnterprise)
 
 
 export default router

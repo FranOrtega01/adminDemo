@@ -23,4 +23,7 @@ export default class Enterprise{
     deleteOne = async(id) => {
         return await enterpriseModel.deleteOne({_id: id})
     }
+    getPaginate = async (search, options) => {
+        return await enterpriseModel.paginate(search, options)
+    }
 }
