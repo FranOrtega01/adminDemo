@@ -3,6 +3,7 @@ import handlebars from 'express-handlebars'
 import __dirname from './utils.js';
 import { Server }  from 'socket.io'
 import socket from './run.js';
+import cors from 'cors'
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,6 +13,9 @@ dotenv.config();
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+// Config CORS
+app.use(cors())
 
 // Config engine templates
 app.engine('handlebars', handlebars.engine())
