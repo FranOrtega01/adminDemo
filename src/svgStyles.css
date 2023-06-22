@@ -1,0 +1,92 @@
+/* Svg general format */
+svg * {
+    user-select: none;
+    transition: fill 250ms ease;
+}
+
+svg tspan {
+    fill: black;
+    font-weight: 400;
+    stroke-width: 0px;
+}
+
+.svgContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.compassSvg {
+    width: 500px;
+    max-height: 700px;
+}
+
+.medium {
+    width: 700px;
+}
+
+.big {
+    width: 1000px;
+}
+
+/* Svg format corrections */
+#Capa_9 rect {
+    stroke: none;
+}
+
+#Capa_9 * {
+    fill: white;
+}
+
+#Capa_1 .cls-2 {
+    fill: white;
+}
+
+#Capa_1-2 path {
+    fill: white;
+}
+
+#AthMagnetsGroup * {
+    fill: white;
+}
+
+/* Osaka Nunotani */
+.OsakaNunotani #Capa_7 rect {
+    fill: none;
+    stroke: none;
+}
+
+.Box circle,
+.Box path {
+    fill: white;
+}
+
+/* Saracom */
+.Saracom #Chain * {
+    fill: white;
+}
+
+.Saracom #Capa_2 path {
+    stroke: none;
+}
+
+.Saracom #Capa_2 circle {
+    fill: white;
+}
+
+/* Cassens */
+.sphere path {
+    fill: white;
+    stroke: none;
+}
+
+.chain ellipse,
+.chain rect,
+.chain circle {
+    fill: white;
+}
+
+.hide {
+    fill: white;
+    stroke: none;
+}

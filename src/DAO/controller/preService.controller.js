@@ -6,7 +6,9 @@ export const sendEmail = async (req, res) => {
     const {sailing} = req.body
     const {currentVariation} = req.body
     const {compass} = req.body
-    const {svgData} = req.body   
+    const {svgData} = req.body  
+    
+    console.log(req.body);
 
     const htmlContent = `
     <html>
