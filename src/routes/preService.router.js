@@ -186,8 +186,6 @@ router.post('/test', upload.any(), async (req, res) => {
         const lastDevCurve = req.files.filter(file => file.fieldname == 'lastDevCurve[]')
 
 
-
-
         const pdfBuffer = await generatePDFFromHTML(rawHTML)
         const particularsZipBuffer = await createZip(particulars)
         const compassPhotosZipBuffer = await createZip(compassPhotos)
