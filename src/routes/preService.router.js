@@ -11,8 +11,53 @@ router.post('/send', sendEmail)
 
 router.post('/test', upload.any(), async (req, res) => {
     try {
-
         const { svg, record, shipName, sailing, long, lat, compass, model, serial, currentVariation, mark } = req.body
+
+        let emptyFields = [];
+        if (!svg) {
+            emptyFields.push('svg')
+        }
+        if (!record) {
+            emptyFields.push('record')
+        }
+        if (!shipName) {
+            emptyFields.push('shipName')
+        }
+        if (!sailing) {
+            emptyFields.push('sailing')
+        }
+        if (!long) {
+            emptyFields.push('long')
+        }
+        if (!lat) {
+            emptyFields.push('lat')
+        }
+        if (!compass) {
+            emptyFields.push('compass')
+        }
+        if (!model) {
+            emptyFields.push('model')
+        }
+        if (!serial) {
+            emptyFields.push('serial')
+        }
+        if (!currentVariation) {
+            emptyFields.push('currentVariation')
+        }
+        if (!mark) {
+            emptyFields.push('mark')
+        }
+        if(emptyFields?.length > 0) return res.status(400).json({status: 'error', message: 'Please fill in all the fields.'})
+
+        const particulars = req.files.filter(file => file.fieldname == 'particulars[]')
+        const compassPhotos = req.files.filter(file => file.fieldname == 'compassPhotos[]')
+        const lastDevCurve = req.files.filter(file => file.fieldname == 'lastDevCurve[]')
+
+        if(!particulars?.length || !compassPhotos?.length || !lastDevCurve?.length ) {
+            return res.status(400).json({status: 'error', message: 'Please drop files.'})
+        }
+
+
 
         const rawHTML = `
         <body>
@@ -180,10 +225,7 @@ router.post('/test', upload.any(), async (req, res) => {
         </body>
         `
 
-        console.log(req.body);
-        const particulars = req.files.filter(file => file.fieldname == 'particulars[]')
-        const compassPhotos = req.files.filter(file => file.fieldname == 'compassPhotos[]')
-        const lastDevCurve = req.files.filter(file => file.fieldname == 'lastDevCurve[]')
+        
 
 
         const pdfBuffer = await generatePDFFromHTML(rawHTML)
