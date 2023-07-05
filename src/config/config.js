@@ -11,5 +11,7 @@ export default {
     adminPass: process.env.ADMIN_PASSWORD,
 
     gmailAppKey: process.env.GMAIL_APP_KEY,
-    gmailAppEmail: process.env.GMAIL_EMAIL
+    gmailAppEmail: process.env.GMAIL_EMAIL,
+
+    jwtSign: process.env.JWT_SIGN
 }

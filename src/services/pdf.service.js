@@ -2,7 +2,6 @@ import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 import __dirname from '../utils.js';
 import JSZip from 'jszip';
-import fs from 'fs'
 
 export const generatePDFFromHTML = async (html) => {
   const $ = cheerio.load(html);

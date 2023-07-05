@@ -12,7 +12,7 @@ const run = (io, app) => {
     app.use('/', homeRouter)
     app.use('/admin', adminViewRouter )
     app.use('/api/admin', adminRouter)
-    app.use('/preservice', preServiceRouter)
+    app.use('/preservice',  preServiceRouter)
 }
 
 export default run

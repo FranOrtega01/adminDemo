@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({ limit: '25mb', extended: true }));
 app.use(cors())
 
 // Config engine templates
-app.engine('handlebars', handlebars.engine())
-app.set('views', __dirname + '/views')
-app.set('view engine', 'handlebars')
+// app.engine('handlebars', handlebars.engine())
+// app.set('views', __dirname + '/views')
+// app.set('view engine', 'handlebars')
 
 // Set config
 app.use(express.json())

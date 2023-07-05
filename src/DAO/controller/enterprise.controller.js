@@ -10,6 +10,7 @@ export const get =  async (req, res) => {
     }
 }
 
+
 export const create = async (req, res) => {
     const {country, name, phone, cuit, adress, email} = req.body
         try {
