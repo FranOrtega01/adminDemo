@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "node-sass --include-path scss src/public/scss/styles/-scss.scss src/public/css/styles.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
