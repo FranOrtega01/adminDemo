@@ -13,5 +13,6 @@ export default {
     gmailAppKey: process.env.GMAIL_APP_KEY,
     gmailAppEmail: process.env.GMAIL_EMAIL,
 
-    jwtSign: process.env.JWT_SIGN
+    jwtSign: process.env.JWT_SIGN,
+    port: process.env.PORT
 }

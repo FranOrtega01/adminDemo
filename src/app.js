@@ -10,9 +10,12 @@ import adminViewRouter from './routes/adminView.router.js'
 import adminRouter from './routes/admin.router.js'
 import preServiceRouter from './routes/preService.router.js'
 import homeRouter from './routes/home.router.js'
+import config from './config/config.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
+
+const PORT = config.port || 8080;
 
 
 // Init Servers
@@ -40,7 +43,7 @@ app.use('/api/admin', adminRouter)
 app.use('/preservice', preServiceRouter)
 
 
-app.listen(8080, () => console.log('Listening...'))
+app.listen(PORT, () => console.log('Listening...'))
 
 // const httpServer = app.listen(8080, () => console.log('Listening...'))
 // const socketServer = new Server(httpServer)
