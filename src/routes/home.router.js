@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { sendEmail } from '../DAO/controller/preService.controller.js';
 import { transport } from '../utils.js'
 import config from '../config/config.js'
+import fetch from 'node-fetch';
 
 const router = Router()
 
@@ -31,16 +31,16 @@ router.post('/send', async (req, res) => {
         if (!message) {
             emptyFields.push('message')
         }
-        if(emptyFields?.length > 0) return res.status(400).json({status: 'error', message: 'Please fill in all the fields.'})
+        if (emptyFields?.length > 0) return res.status(400).json({ status: 'error', message: 'Please fill in all the fields.' })
 
 
         const html = `
-            <h2>Email de prueba</h2>
-            ${name}
-            ${email}
-            ${number}
-            ${enterprise}
-            ${message}
+            <h2>Email de contacto</h2>
+            <p><b>Nombre: </b> ${name} </p>
+            <p><b>Email: </b> ${email} </p>
+            <p><b>Numero: </b> ${number} </p>
+            <p><b>Empresa: </b> ${enterprise} </p>
+            <p><b>Mensaje: </b> ${message} </p>
         `
 
         const result = await transport.sendMail({
@@ -55,4 +55,33 @@ router.post('/send', async (req, res) => {
     }
 
 })
+
+router.post("/verify-recaptcha", (req, res) => {
+    const token = req.body.token;
+
+    // Realizar una solicitud POST a la API de verificación de reCAPTCHA de Google
+    fetch("https://www.google.com/recaptcha/api/siteverify", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${config.reCaptchaKey}&response=${token}`,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            const { success } = data;
+
+            if (success) {
+                // El token es válido, procede con el procesamiento del formulario
+                res.status(200).send({ status:'success'});
+            } else {
+                // El token no es válido, probablemente enviado por un bot
+                res.status(400).json({status:'error', error: "Error de verificación de reCAPTCHA" });
+            }
+        })
+        .catch((error) => {
+            // Error en la verificación
+            res.status(500).json({ error: "Error del servidor" });
+        });
+});
 export default router

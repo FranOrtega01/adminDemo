@@ -16,7 +16,7 @@ export default class Enterprise{
     }
 
     update = async(id, updUser)=>{
-        const result = await enterpriseModel.updateOne({_id: id}, updUser);
+        const result = await enterpriseModel.updateOne({_id: id}, {$set: updUser});
         return result;
     }
 

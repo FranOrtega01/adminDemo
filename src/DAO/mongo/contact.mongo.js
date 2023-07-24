@@ -1,7 +1,7 @@
 import contactModel from "./models/contact.model.js";
 
-export default class Contact{
-    constructor(){}
+export default class Contact {
+    constructor() { }
 
     get = async () => {
         return await contactModel.find().lean().exec()
@@ -11,11 +11,11 @@ export default class Contact{
         return await contactModel.create(data)
     }
 
-    getOneByID = async(id) => {
-        return await contactModel.findById({_id:id}).lean().exec();
+    getOneByID = async (id) => {
+        return await contactModel.findById({ _id: id }).lean().exec();
     }
 
-    getByParam = async (param,value) => {
+    getByParam = async (param, value) => {
         const search = {}
         search[param] = value
         return await contactModel.find(search).lean().exec()
@@ -34,18 +34,32 @@ export default class Contact{
         return await this.update(id, user)
     }
 
-    update = async(id, updUser)=>{
+    deleteHistory = async (id, hid) => {
         try {
-            console.log(updUser);
-            const result = await contactModel.updateOne({_id: id}, {$set: updUser});
+            const result = await contactModel.updateOne(
+                { _id: id },
+                { $pull: { history: { id: hid } } }
+            );
+
+            console.log('History deleted:', result);
+            return result;
+        } catch (error) {
+            console.error('Error deleting history:', error);
+            throw error;
+        }
+    }
+
+    update = async (id, updUser) => {
+        try {
+            const result = await contactModel.updateOne({ _id: id }, { $set: updUser });
             return result;
         } catch (error) {
             console.log('Error en mongo: ', error);
         }
     }
 
-    deleteOne = async(id) => {
-        return await contactModel.deleteOne({_id: id})
+    deleteOne = async (id) => {
+        return await contactModel.deleteOne({ _id: id })
     }
 
     getPaginate = async (search, options) => {

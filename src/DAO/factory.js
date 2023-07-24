@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 export default {};
 export let Enterprise
 export let Contact
+export let User
 
 console.log(`PERSISTENCE: [${config.persistence}]`);
 switch (config.persistence) {
@@ -18,9 +19,12 @@ switch (config.persistence) {
                 
         const { default: EnterpriseMongo } = await import('./mongo/enterprise.mongo.js')
         const { default: ContactMongo } = await import('./mongo/contact.mongo.js')
+        const { default: UserMongo } = await import('./mongo/user.mongo.js')
 
         Enterprise = EnterpriseMongo
         Contact = ContactMongo
+        User = UserMongo
+
         
         break;
     default:

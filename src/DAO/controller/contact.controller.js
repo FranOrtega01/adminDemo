@@ -1,10 +1,12 @@
 import { ContactService } from "../../repository/index.js";
+import { v4 as uuidv4 } from 'uuid';
+
 
 // Get all contacts
-export const get =  async (req, res) => {
+export const get = async (req, res) => {
     try {
         const contacts = await ContactService.get()
-        res.json({contacts})
+        res.json({ contacts })
     } catch (error) {
         res.send(error)
     }
@@ -16,22 +18,22 @@ export const getPaginate = async (req, res) => {
     const page = req.query?.page || 1
     const filter = req.query?.query || ''
     const sort = req.query.sort
-    
+
 
     const options = {
         limit,
         page,
-        lean:true,
+        lean: true,
     }
 
     const search = {}
 
-    if(filter)  search.name = filter.toUpperCase()
-    
+    if (filter) search.name = filter.toUpperCase()
 
-    if(sort){
-        if(sort === 'asc') options.sort = {'date': 1}
-        if(sort === 'desc') options.sort = {'date': -1}
+
+    if (sort) {
+        if (sort === 'asc') options.sort = { 'date': 1 }
+        if (sort === 'desc') options.sort = { 'date': -1 }
     }
 
 
@@ -39,16 +41,16 @@ export const getPaginate = async (req, res) => {
 
         const data = await ContactService.getPaginate(search, options)
 
-    
+
         data.prevLink = data.hasPrevPage ? `/admin/contact?page=${data.prevPage}` : null
         data.nextLink = data.hasNextPage ? `/admin/contact?page=${data.nextPage}` : null
-    
-    
-        res.json({data})
+
+
+        res.json({ data })
 
 
     } catch (error) {
-        res.send({status: 'error', error, message:'error en el paginate'})
+        res.send({ status: 'error', error, message: 'error en el paginate' })
     }
 }
 
@@ -57,109 +59,114 @@ export const getOneByID = async (req, res) => {
     const { id } = req.params
     try {
         const contact = await ContactService.getOneByID(id)
-        res.json(contact)
+        return res.status(200).json({ status: 'success', payload: contact })
     } catch (error) {
-        res.send(error)
+        return res.status(400).json({ status: 'error', payload: 'Contact not found' })
+
     }
 }
 
 export const create = async (req, res) => {
-    const {enterprise, owner, name,email,imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
-        try {
-            // Crear contacto
-            const newUser = {
-                enterprise,
-                owner, 
-                name, 
-                email,
-                imoNumber,
-                mmsi,
-                callSign, 
-                flag, 
-                portReg, 
-                compass, 
-                mark, 
-                serialNumber,
-                status
-            }
-            console.log(newUser);
-            await ContactService.create(newUser)
-            console.log('Created succesfully');
-            res.redirect('/admin')
-        } catch (error) {
-            res.send(error)
-        }
-}
+    const { enterprise, owner, name, email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status } = req.body
 
-export const update = async(req, res) => {
-
-    console.log('BODY: ', req.body);
-    const {enterprise, owner, name,email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status} = req.body
-    const { id } = req.params
     try {
-        
-        const data = {
+
+        if (!enterprise || !owner || !email || !imoNumber || !name || !mmsi || !callSign || !flag || !portReg || !compass || !mark || !serialNumber || !status) {
+            return res.status(400).send({ status: 'error', message: 'Missing fields' })
+        }
+
+        // Crear contacto
+        const newUser = {
             enterprise,
-            owner, 
-            name, 
+            owner,
+            name,
             email,
             imoNumber,
             mmsi,
-            callSign, 
-            flag, 
-            portReg, 
-            compass, 
-            mark, 
+            callSign,
+            flag,
+            portReg,
+            compass,
+            mark,
             serialNumber,
             status
         }
 
-        await ContactService.update(id, data)
+        await ContactService.create(newUser)
+        res.status(200).send({ status: 'success', message: 'Contact created.' })
+    } catch (error) {
+        res.status(400).send({ status: 'error', message: 'Missing fields.' })
 
-        console.log('Updated succesfully');
-        res.send({status: 'success'})
+    }
+}
+
+export const update = async (req, res) => {
+
+    const { id } = req.params
+    try {
+        await ContactService.update(id, req.body)
+
+        res.status(200).send({ status: 'success', message: 'Contact updated' })
 
     } catch (error) {
-        res.send(error)
+        res.status(500).send({ status: 'error', message: 'An error ocurred updating contact' })
+
+    }
+}
+
+
+
+export const getHistory = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const historyLog = await ContactService.getHistory(id)
+        res.status(200).json({ status: 'success', payload: historyLog })
+    } catch (error) {
+        res.status(200).json({ status: 'error', message: 'An error ocurred fetching history' })
+
     }
 }
 
 export const addHistory = async (req, res) => {
-    const {message} = req.body
-    const {id} = req.params
+    const { message } = req.body
+    const { id } = req.params
 
     const date = new Date()
     try {
         const newHistory = {
+            id: uuidv4(),
             message,
-            date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+            date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
         }
 
         await ContactService.addHistory(id, newHistory)
 
-        res.redirect('/admin')
+        res.status(200).json({ status: 'success', message: 'History created' })
     } catch (error) {
-        console.log('ERROR: ', error);
+        res.status(500).json({ status: 'error', message: 'An error ocurred creating history' })
     }
 }
 
-export const getHistory = async (req, res) => {
-    const {id} = req.params
-
+export const deleteHistory = async (req, res) => {
+    const { id, hid } = req.params
     try {
-        const historyLog = await ContactService.getHistory(id)
-        res.send(historyLog)
+        await ContactService.deleteHistory(id, hid)
+        return res.status(200).send({ status: 'success' })
     } catch (error) {
-        res.send({status: 'error', error})
+        res.status(500).send({ status: 'error', message: 'An error ocurred deleting contact' })
     }
 }
+
+
 
 export const deleteOne = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     try {
-        const deleted = await ContactService.deleteOne(id)
-        res.send({status: 'success'})
+        await ContactService.deleteOne(id)
+        return res.status(200).send({ status: 'success', message: 'Contact deleted' })
     } catch (error) {
-        res.send({status: 'error', error})
+        console.log(error);
+        res.status(500).send({ status: 'error', message: 'An error ocurred deleting contact' })
     }
 }

@@ -14,5 +14,19 @@ export default {
     gmailAppEmail: process.env.GMAIL_EMAIL,
 
     jwtSign: process.env.JWT_SIGN,
-    port: process.env.PORT
+    jwtCookie: process.env.JWT_COOKIE,
+    
+    sessionSign: process.env.SESSION_SIGN,
+
+    adminEmailOne: process.env.ADMIN_EMAIL_ONE,
+    adminEmailTwo: process.env.ADMIN_EMAIL_TWO,
+    
+    adminPassOne: process.env.ADMIN_PASS_ONE,
+    adminPassTwo: process.env.ADMIN_PASS_TWO,
+    
+    frontURL: process.env.FRONT_URL,
+
+    reCaptchaKey: process.env.RECAPTCHA_KEY,
+
+    port: process.env.PORT,
 }

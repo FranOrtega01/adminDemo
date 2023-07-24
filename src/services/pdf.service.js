@@ -26,14 +26,45 @@ export const generatePDFFromHTML = async (html) => {
   return pdfBuffer;
 };
 
-export const createZip = async (files) => {
-    const zip = new JSZip();
+// export const createZip = async (files) => {
+//     const zip = new JSZip();
 
-    // Recorre el array de archivos
-    files.forEach((file) => {
-      zip.file(file.originalname, file.buffer);
+//     // Recorre el array de archivos
+//     files.forEach((file) => {
+//       zip.file(file.originalname, file.buffer);
+//     });
+
+//     const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+//     return zipBuffer;
+// }
+
+export const createZip = async (particulars, compassPhotos, lastDevCurve, other, mark) => {
+  const zip = new JSZip();
+
+  // Agregar las carpetas al archivo ZIP
+  const particularsFolder = zip.folder('Particulars');
+  const compassPhotosFolder = zip.folder('CompassPhotos');
+  const lastDevCurveFolder = zip.folder('LastDeviationCurve');
+
+  // Agregar los archivos a las carpetas correspondientes
+  particulars.forEach((file) => {
+    particularsFolder.file(file.originalname, file.buffer);
+  });
+  compassPhotos.forEach((file) => {
+    compassPhotosFolder.file(file.originalname, file.buffer);
+  });
+  lastDevCurve.forEach((file) => {
+    lastDevCurveFolder.file(file.originalname, file.buffer);
+  });
+
+  // Agregar la carpeta "Other" si existe y mark es igual a 'OTHER'
+  if (mark === 'OTHER') {
+    const otherFolder = zip.folder('Other');
+    other.forEach((file) => {
+      otherFolder.file(file.originalname, file.buffer);
     });
+  }
 
-    const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
-    return zipBuffer;
-}
+  const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+  return zipBuffer;
+};

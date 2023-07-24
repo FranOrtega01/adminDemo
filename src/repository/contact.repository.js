@@ -55,6 +55,13 @@ export default class ContactRepository{
         }
     }
 
+    deleteHistory = async (id, hid) => {
+        try {
+            return await this.dao.deleteHistory(id,hid)
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 
     update = async (id, data) => {
         try {
