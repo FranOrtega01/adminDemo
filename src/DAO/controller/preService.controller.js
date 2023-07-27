@@ -212,7 +212,6 @@ export const sendEmail = async (req, res) => {
 
         const zipBuffer = await createZip(particulars, compassPhotos, lastDevCurve, other, mark);
 
-
         const result = await transport.sendMail({
             from: config.gmailAppEmail,
             to:config.gmailAppEmail ,
