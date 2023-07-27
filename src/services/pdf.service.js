@@ -4,40 +4,46 @@ import __dirname from '../utils.js';
 import JSZip from 'jszip';
 
 export const generatePDFFromHTML = async (html) => {
-  const $ = cheerio.load(html);
+  try {
 
-  // Eliminamos los elementos <h2>
-  $('h2').remove();
-  $('label').remove();
-  $('input').remove();
+    const $ = cheerio.load(html);
+
+    // Eliminamos los elementos <h2>
+    $('h2').remove();
+    $('label').remove();
+    $('input').remove();
 
 
-  const modifiedHTML = $.html();
+    const modifiedHTML = $.html();
 
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox'],
-  });
-  const page = await browser.newPage();
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox'],
+    });
+    const page = await browser.newPage();
 
-  await page.setContent(modifiedHTML, { waitUntil: 'networkidle0' });
+    await page.setContent(modifiedHTML, { waitUntil: 'networkidle0' });
 
-  const pdfBuffer = await page.pdf({ format: 'A4' });
+    const pdfBuffer = await page.pdf({ format: 'A4' });
 
-  await browser.close();
+    await browser.close();
 
-  return pdfBuffer;
+    return pdfBuffer;
+  } catch (error) {
+    console.error('Error en el puppeteer: ', error)
+  }
 };
 
 export const createOtherZip = async (files) => {
-    const zip = new JSZip();
 
-    // Recorre el array de archivos
-    files.forEach((file) => {
-      zip.file(file.originalname, file.buffer);
-    });
+  const zip = new JSZip();
 
-    const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
-    return zipBuffer;
+  // Recorre el array de archivos
+  files.forEach((file) => {
+    zip.file(file.originalname, file.buffer);
+  });
+
+  const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+  return zipBuffer;
 }
 
 export const createZip = async (particulars, compassPhotos, lastDevCurve, other, mark) => {
