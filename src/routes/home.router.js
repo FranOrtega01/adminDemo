@@ -45,7 +45,7 @@ router.post('/send', async (req, res) => {
 
         const result = await transport.sendMail({
             from: config.gmailAppEmail,
-            to: "franortega.wg@gmail.com",
+            to: `info@instrumentaldufour.net`,
             subject: subject,
             html
         })
