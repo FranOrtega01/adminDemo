@@ -8,9 +8,9 @@ const contactSchema = new mongoose.Schema({
     owner: String,
     name: String,
     email: String,
-    imoNumber:{
-        type:Number,
-        unique:true
+    imoNumber: {
+        type: Number,
+        unique: true
     },
     mmsi: Number,
     callSign: String,
@@ -20,14 +20,27 @@ const contactSchema = new mongoose.Schema({
     mark: String,
     serialNumber: String,
     status: String,
-    history:{
+    history: {
         type: Array,
         default: []
     },
-    date:{
+    date: {
         type: Date,
         default: new Date()
-    }
+    },
+    createdBy: {
+        type: String,
+        default: ''
+    },
+    alerts: [{
+        date: {
+            type: Date,
+        },
+        message: {
+            type: String,
+            default: 'Renovar certificado!'
+        }
+    }]
 })
 
 contactSchema.plugin(mongoosePaginate)

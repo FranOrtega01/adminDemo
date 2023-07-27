@@ -49,6 +49,21 @@ export default class Contact {
         }
     }
 
+    deleteAlert = async (id,date) => {
+        console.log(date);
+        try {
+            const result = await contactModel.updateOne(
+                { _id: id },
+                { $pull: { alerts: { date } } }
+            )
+            console.log('Alert deleted: ', result);
+            return result;
+        } catch (error) {
+            console.error('Error deleting alert:', error);
+            throw error;
+        }
+    }
+
     update = async (id, updUser) => {
         try {
             const result = await contactModel.updateOne({ _id: id }, { $set: updUser });

@@ -63,6 +63,14 @@ export default class ContactRepository{
         }
     }
 
+    deleteAlert = async (id, date) => {
+        try {
+            return await this.dao.deleteAlert(id, date)
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
     update = async (id, data) => {
         try {
             // const newContact = new ContactDTO(data)

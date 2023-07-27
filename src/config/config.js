@@ -18,12 +18,6 @@ export default {
     
     sessionSign: process.env.SESSION_SIGN,
 
-    adminEmailOne: process.env.ADMIN_EMAIL_ONE,
-    adminEmailTwo: process.env.ADMIN_EMAIL_TWO,
-    
-    adminPassOne: process.env.ADMIN_PASS_ONE,
-    adminPassTwo: process.env.ADMIN_PASS_TWO,
-    
     frontURL: process.env.FRONT_URL,
 
     reCaptchaKey: process.env.RECAPTCHA_KEY,

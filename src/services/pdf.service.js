@@ -26,17 +26,17 @@ export const generatePDFFromHTML = async (html) => {
   return pdfBuffer;
 };
 
-// export const createZip = async (files) => {
-//     const zip = new JSZip();
+export const createOtherZip = async (files) => {
+    const zip = new JSZip();
 
-//     // Recorre el array de archivos
-//     files.forEach((file) => {
-//       zip.file(file.originalname, file.buffer);
-//     });
+    // Recorre el array de archivos
+    files.forEach((file) => {
+      zip.file(file.originalname, file.buffer);
+    });
 
-//     const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
-//     return zipBuffer;
-// }
+    const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+    return zipBuffer;
+}
 
 export const createZip = async (particulars, compassPhotos, lastDevCurve, other, mark) => {
   const zip = new JSZip();

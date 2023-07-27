@@ -1,10 +1,27 @@
 import { Router } from 'express';
 
-import { get as getContact, create as createContact, getOneByID as getOneByIDContact, update as updateContact, deleteOne as deleteContact, addHistory, getHistory, deleteHistory } from '../DAO/controller/contact.controller.js'
+import { 
+    get as getContact, 
+    create as createContact, 
+    getOneByID as getOneByIDContact, 
+    update as updateContact, 
+    deleteOne as deleteContact, 
+    addHistory, 
+    getHistory, 
+    deleteHistory, 
+    deleteAlert } 
+from '../DAO/controller/contact.controller.js'
 
-import { get as getEnterprise, create as createEnterprise, getOneByID as getOneByIDEnterprise, update as updateEnterprise, deleteOne as deleteEnterprise } from '../DAO/controller/enterprise.controller.js'
+import { get as getEnterprise, 
+    create as createEnterprise, 
+    getOneByID as getOneByIDEnterprise, 
+    update as updateEnterprise, 
+    deleteOne as deleteEnterprise } 
+    from '../DAO/controller/enterprise.controller.js'
+
 import { getPaginate as getPaginateContact } from '../DAO/controller/contact.view.controller.js';
 import { getPaginate as getPaginateEnterprise } from '../DAO/controller/enterprise.view.controller.js';
+import { authorization } from '../utils.js';
 
 
 const router = Router()
@@ -17,19 +34,23 @@ router.get('/contact/all', getContact)
 
 router.get('/contact/:id', getOneByIDContact)
 
-router.post('/contact', createContact)
+router.post('/contact', authorization(['admin']), createContact)
 
-router.put('/contact/:id', updateContact)
+router.put('/contact/:id', authorization(['admin']), updateContact)
 
-router.delete('/contact/:id' , deleteContact)
+router.delete('/contact/:id' , authorization(['admin']), deleteContact)
 
 // Contact History
 
-router.get('/contact/:id/history', getHistory)
+router.get('/contact/:id/history',authorization(['admin']), getHistory)
 
-router.post('/contact/:id/history', addHistory)
+router.post('/contact/:id/history',authorization(['admin']), addHistory)
 
-router.delete('/contact/:id/history/:hid', deleteHistory)
+router.delete('/contact/:id/history/:hid',authorization(['admin']), deleteHistory)
+
+// Contact Alert
+
+router.put('/contact/:id/alert',authorization(['admin']), deleteAlert)
 
 
 // Enterprise
@@ -40,11 +61,11 @@ router.get('/enterprise/all', getEnterprise)
 
 router.get('/enterprise/:id', getOneByIDEnterprise)
 
-router.post('/enterprise', createEnterprise)
+router.post('/enterprise',authorization(['admin']), createEnterprise)
 
-router.put('/enterprise/:id', updateEnterprise)
+router.put('/enterprise/:id',authorization(['admin']), updateEnterprise)
 
-router.delete('/enterprise/:id', deleteEnterprise)
+router.delete('/enterprise/:id',authorization(['admin']), deleteEnterprise)
 
 
 export default router
