@@ -2,6 +2,7 @@ import UserDTO from '../DTO/user.dto.js'
 import config from '../../config/config.js';
 
 export const login = async (req, res) => {
+    console.log('entro al login');
     if (!req.user) {
         return res.status(400).send({ status: 'error', error: 'Invalid credentials' })
     }
