@@ -214,7 +214,7 @@ export const sendEmail = async (req, res) => {
 
         const result = await transport.sendMail({
             from: config.gmailAppEmail,
-            to:config.gmailAppEmail ,
+            to:`info@instrumentaldufour.net` ,
             subject: 'Pre Service',
             html: `<body> 
                 <h1>Instrumental Dufour</h1>
@@ -450,7 +450,7 @@ export const sendEmailPost = async (req, res) => {
 
         const result = await transport.sendMail({
             from: config.gmailAppEmail,
-            to:config.gmailAppEmail,
+            to:`info@instrumentaldufour.net`,
             subject: 'Post Service',
             html: `<body> 
                 <h1>Instrumental Dufour</h1>

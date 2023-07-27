@@ -1,7 +1,6 @@
 import passport from 'passport'
 import local from 'passport-local'
 import jwt from 'passport-jwt'
-import GoogleStrategy from 'passport-google-oidc'
 import { createHash, isValidPassword, generateUserToken, extractCookie } from "../utils.js";
 import { UserService } from '../repository/index.js'
 import config from './config.js'
