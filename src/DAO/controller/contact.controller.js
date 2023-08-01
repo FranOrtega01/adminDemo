@@ -4,14 +4,25 @@ import { v4 as uuidv4 } from 'uuid';
 // Get all contacts
 export const get = async (req, res) => {
     try {
+        const user = req.user.user
         const contacts = await ContactService.get()
-        res.json({ contacts })
+        if (user.role === 'admin') return res.status(200).send({ status: 'success', payload: contacts })
+
+        if (user.role === 'marilot') {
+            const filteredUsers = contacts.filter((contacts) => contacts.enterprise === 'MARILOT ELECTRONIC SYSTEMS LTD');
+            return res.status(200).send({ status: 'success', payload: filteredUsers })
+        }
+
     } catch (error) {
         res.send(error)
     }
 }
 
 export const getPaginate = async (req, res) => {
+
+    const user = req.user.user
+    console.log(user);
+
     const limit = req.query?.limit || 5
     const page = req.query?.page || 1
     const filter = req.query?.query || ''
@@ -24,6 +35,15 @@ export const getPaginate = async (req, res) => {
     }
 
     const search = {}
+
+    if (user.role === 'admin') {
+    } else if (user.role === 'marilot') {
+        search.enterprise = 'MARILOT ELECTRONIC SYSTEMS LTD';
+    } else {
+        // Otros casos (puedes agregar más condiciones para otros roles si es necesario)
+        res.status(403).json({ message: 'Acceso denegado' });
+        return;
+    }
 
     if (filter) search.name = filter.toUpperCase()
 
@@ -93,8 +113,8 @@ export const create = async (req, res) => {
     }
 }
 
-export const deleteAlert = async (req,res) => {
-    const {id} = req.params
+export const deleteAlert = async (req, res) => {
+    const { id } = req.params
     const { date } = req.body
     console.log('date en controller', date);
     try {
@@ -108,7 +128,7 @@ export const deleteAlert = async (req,res) => {
 export const update = async (req, res) => {
     const { id } = req.params
     try {
-        const updateUser =  {
+        const updateUser = {
             ...req.body,
             alerts: [
                 {

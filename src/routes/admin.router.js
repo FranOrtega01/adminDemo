@@ -55,11 +55,11 @@ router.put('/contact/:id/alert',authorization(['admin']), deleteAlert)
 
 // Enterprise
 
-router.get('/enterprise', getPaginateEnterprise)
+router.get('/enterprise',authorization(['admin']), getPaginateEnterprise)
 
-router.get('/enterprise/all', getEnterprise)
+router.get('/enterprise/all',authorization(['admin']), getEnterprise)
 
-router.get('/enterprise/:id', getOneByIDEnterprise)
+router.get('/enterprise/:id',authorization(['admin']), getOneByIDEnterprise)
 
 router.post('/enterprise',authorization(['admin']), createEnterprise)
 

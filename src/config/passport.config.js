@@ -33,7 +33,7 @@ const initializePassport = () => {
                     return done(null, false) // (null) No hay ningun error pero, (false) el usuario ya existe.
                 }
 
-                if(role) return done('El rol no puede ser "admin".')
+                if(role === 'adimn') return done('El rol no puede ser "admin".')
 
                 
                 // Crea el user con el hash
