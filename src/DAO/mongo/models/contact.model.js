@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-const contactCollection = 'contacts';
+const contactCollection = 'contacts2';
 
 const contactSchema = new mongoose.Schema({
     enterprise: String,
@@ -10,8 +10,6 @@ const contactSchema = new mongoose.Schema({
     email: String,
     imoNumber: {
         type: Number,
-        unique: true,
-        sparse: true
     },
     mmsi: Number,
     callSign: String,
@@ -20,7 +18,10 @@ const contactSchema = new mongoose.Schema({
     compass: String,
     mark: String,
     serialNumber: String,
-    status: String,
+    status: {
+        type: String,
+        default: "newShip"
+    },
     history: {
         type: Array,
         default: []

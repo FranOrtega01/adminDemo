@@ -77,10 +77,10 @@ export const getOneByID = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    const { enterprise, owner, name, email, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status, alertDate } = req.body
-    console.log(req.body);
+    const { enterprise, owner, name, email,imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status, alertDate } = req.body
     try {
-        if (!enterprise || !owner || !email || !name || !mmsi || !callSign || !flag || !portReg || !compass || !mark || !serialNumber || !status) {
+        if (!enterprise || !owner || !email || !name || !mmsi || !callSign || !flag || !portReg || !compass || !mark || !serialNumber) {
+            console.log("entro");
             return res.status(400).send({ status: 'error', message: 'Missing fields' })
         }
         // Crear contacto
@@ -89,6 +89,7 @@ export const create = async (req, res) => {
             owner,
             name,
             email,
+            imoNumber,
             mmsi,
             callSign,
             flag,
@@ -104,13 +105,10 @@ export const create = async (req, res) => {
                 },
             ],
         }
-        if(req.body.imoNumber){
-            newUser.imoNumber = req.body.imoNumber;
-        }
         const payload = await ContactService.create(newUser)
-        console.log(payload);
         res.status(200).send({ status: 'success', message: 'Contact created.' })
     } catch (error) {
+        console.log(error);
         res.status(400).send({ status: 'error', message: 'Missing fields.' })
     }
 }

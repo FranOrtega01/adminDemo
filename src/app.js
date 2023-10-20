@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ limit: '25mb', extended: true }));
 
 const corsOptions = {
     origin: ['https://instrumentaldufour.net', 'https://www.instrumentaldufour.net'], 
+    // origin: ['http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
