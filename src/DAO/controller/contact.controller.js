@@ -89,7 +89,6 @@ export const create = async (req, res) => {
             owner,
             name,
             email,
-            imoNumber: imoNumberValue,
             mmsi,
             callSign,
             flag,
