@@ -79,8 +79,9 @@ export const getOneByID = async (req, res) => {
 export const create = async (req, res) => {
     const { enterprise, owner, name, email, imoNumber, mmsi, callSign, flag, portReg, compass, mark, serialNumber, status, alertDate } = req.body
     console.log(req.body);
+    const imoNumberValue = imoNumber === '' ? undefined : imoNumber;
     try {
-        if (!enterprise || !owner || !email || !imoNumber || !name || !mmsi || !callSign || !flag || !portReg || !compass || !mark || !serialNumber || !status) {
+        if (!enterprise || !owner || !email || !name || !mmsi || !callSign || !flag || !portReg || !compass || !mark || !serialNumber || !status) {
             return res.status(400).send({ status: 'error', message: 'Missing fields' })
         }
         // Crear contacto
@@ -89,7 +90,7 @@ export const create = async (req, res) => {
             owner,
             name,
             email,
-            imoNumber,
+            imoNumber: imoNumberValue,
             mmsi,
             callSign,
             flag,
