@@ -10,9 +10,7 @@ const LocalStrategy = local.Strategy
 const JWTStrategy = jwt.Strategy
 const JWTExtract = jwt.ExtractJwt
 
-
 const initializePassport = () => {
-
 
     //Estrategia para register
     passport.use('register', new LocalStrategy({
@@ -65,8 +63,9 @@ const initializePassport = () => {
             }
 
             // No hay error, pero esta mal las password
-            if (!isValidPassword(user, password)) return done(null, false)
-
+            if (!isValidPassword(user, password)){
+                return done(null, false)
+            }
             // jwt Token
 
             const token = generateUserToken(user, '24h');

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from 'passport'
 import { passportCall, authorization   } from '../utils.js';
-import { login, profile, logout } from "../DAO/controller/session.controller.js";
+import { login, logout } from "../DAO/controller/session.controller.js";
 import UserDTO from "../DAO/DTO/user.dto.js";
 
 const router = Router();

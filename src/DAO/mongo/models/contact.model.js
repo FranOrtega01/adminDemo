@@ -10,7 +10,8 @@ const contactSchema = new mongoose.Schema({
     email: String,
     imoNumber: {
         type: Number,
-        unique: true
+        unique: true,
+        sparse: true
     },
     mmsi: Number,
     callSign: String,
